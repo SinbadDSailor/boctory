@@ -1,0 +1,18 @@
+[
+    {
+        "id":1,
+        "platform":"9gag",
+        "email":"test@gmail.com",
+        "password":"test@#",
+        "acc_date":"26.3.2023",
+        "email_pass":"test@#"
+    },
+    {
+        "id":2,
+        "platform":"9gag",
+        "email":"test.test@gmail.com",
+        "password":"asdf",
+        "acc_date":"26.03.2023",
+        "email_pass":"asdf@"
+    }
+]

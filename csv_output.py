@@ -1,7 +1,9 @@
+import logging
+import os
+import pandas as pd
 import sqlite3
 from sqlite3 import Error
 from colors import colors
-import logging
 
 #Logging setup ------------------>
 filenm = "storage/log.log"
@@ -9,7 +11,6 @@ fmat = "%(levelname)s: %(asctime)s | %(name)s | %(funcName)s | %(message)s"
 logging.basicConfig(filename=filenm, level=logging.DEBUG, format=fmat, filemode="w")
 logger = logging.getLogger(__name__)
 #Logging setup -----------------/>
-
 
 def create_connection(db_file):
     conn = None
@@ -21,34 +22,25 @@ def create_connection(db_file):
 
     return conn
 
-def create_table(conn, create_table_sql):
-    try:
-        c = conn.cursor()
-        c.execute(create_table_sql)
-    except Error as e:
-        logger.error(e)
 
-def db_main():
+def output_csv(): # Export to CSV function---------->
+    csv_file = input("Enter CSV file name: ")
+    csv_file_full = csv_file + ".csv"
     file_path = "storage/bots.db"
-
-    a_table = """CREATE TABLE IF NOT EXISTS bots (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    platform TEXT,
-    email TEXT,
-    password TEXT,
-    acc_date TEXT,
-    email_pass TEXT);
-    """
+    out_parent_path = "output"
+    out_csv = os.path.join(out_parent_path, csv_file_full)
 
     conn = create_connection(file_path)
 
+    print_out_comm = """SELECT * FROM bots;"""
+
     if conn is not None:
-        create_table(conn, a_table)
-        conn.commit()
-        print(colors.BGREEN + "[~] Database successfully created!" + colors.END)
+        table = pd.read_sql_query(print_out_comm, conn)
+        table.to_csv(out_csv, index=False)
+        print(colors.BGREEN + f"Successfully exported to {out_csv}" + colors.END)
         conn.close()
     else:
-        logger.error("Error while creating Database")
+        logger.error("Error while trying to output to CSV")
+                  # Export to CSV function---------/>
 
-
-db_main()
+output_csv()

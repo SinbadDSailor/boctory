@@ -1,7 +1,8 @@
+import logging
+import pandas as pd
 import sqlite3
 from sqlite3 import Error
 from colors import colors
-import logging
 
 #Logging setup ------------------>
 filenm = "storage/log.log"
@@ -9,7 +10,6 @@ fmat = "%(levelname)s: %(asctime)s | %(name)s | %(funcName)s | %(message)s"
 logging.basicConfig(filename=filenm, level=logging.DEBUG, format=fmat, filemode="w")
 logger = logging.getLogger(__name__)
 #Logging setup -----------------/>
-
 
 def create_connection(db_file):
     conn = None
@@ -21,34 +21,21 @@ def create_connection(db_file):
 
     return conn
 
-def create_table(conn, create_table_sql):
-    try:
-        c = conn.cursor()
-        c.execute(create_table_sql)
-    except Error as e:
-        logger.error(e)
-
-def db_main():
+def output_print_term(): # Print output to terminal function---------->
     file_path = "storage/bots.db"
-
-    a_table = """CREATE TABLE IF NOT EXISTS bots (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    platform TEXT,
-    email TEXT,
-    password TEXT,
-    acc_date TEXT,
-    email_pass TEXT);
-    """
 
     conn = create_connection(file_path)
 
+    print_out_comm = """SELECT * FROM bots;"""
+
     if conn is not None:
-        create_table(conn, a_table)
-        conn.commit()
-        print(colors.BGREEN + "[~] Database successfully created!" + colors.END)
+        table = pd.read_sql_query(print_out_comm, conn)
+        print(table)
         conn.close()
     else:
-        logger.error("Error while creating Database")
+        logger.error("Error while trying to output to terminal")
+                         # Print output to terminal function---------/>
 
 
-db_main()
+
+output_print_term()
