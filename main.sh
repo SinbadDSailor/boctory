@@ -5,9 +5,10 @@ current_version="0.1"
 #colors ---------->
 tail="\e[0m"
 blue="\e[1;34m"
+tblue="\e[0;34m"
 green="\e[1;32m"
 red="\e[1;31m"
-#colors ---------->
+#colors ---------/>
 
 mainfunc () {
     sleep 1
@@ -41,7 +42,7 @@ banner_print () {
     echo "██╔══██╗██║   ██║██║        ██║   ██║   ██║██╔══██╗  ╚██╔╝  "
     echo "██████╔╝╚██████╔╝╚██████╗   ██║   ╚██████╔╝██║  ██║   ██║   "
     echo "╚═════╝  ╚═════╝  ╚═════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝   ╚═╝   "
-    echo -e "$green Version: $current_version $tail"
+    echo -e "$green Version:$tail $red$current_version $tail"
     echo "============================================================"
 }
 
@@ -59,7 +60,7 @@ main_menu () {
 adv_options_menu () {
 
     echo ""
-    echo -e "${blue}Main-Menu/Advanced-Options $tail"
+    echo -e "${tblue}Main-Menu/Advanced-Options $tail"
     echo "[1] Setup Selenium"
     echo "[2] Back"
     echo "======================="
@@ -68,7 +69,7 @@ adv_options_menu () {
 db_man_menu () {
 
     echo ""
-    echo -e "${blue}Main-Menu/Database-Management $tail"
+    echo -e "${tblue}Main-Menu/Database-Management $tail"
     echo "[1] Setup database"
     echo "[2] Input options"
     echo "[3] Output options"
@@ -80,7 +81,7 @@ db_man_menu () {
 input_options_menu () {
 
     echo ""
-    echo -e "${blue}Main-Menu/Database-Management/Input-Options $tail"
+    echo -e "${tblue}Main-Menu/Database-Management/Input-Options $tail"
     echo "[1] Input manually"
     echo "[2] Input from CSV"
     echo "[3] Input from JSON"
@@ -92,7 +93,7 @@ input_options_menu () {
 output_options_menu () {
 
     echo ""
-    echo -e "${blue}Main-Menu/Database-Management/Output-Options $tail"
+    echo -e "${tblue}Main-Menu/Database-Management/Output-Options $tail"
     echo "[1] Output to terminal"
     echo "[2] Output to CSV"
     echo "[3] Output to JSON"
