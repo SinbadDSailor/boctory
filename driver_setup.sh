@@ -3,7 +3,6 @@
 chvc=$(google-chrome --version)
 chrome_version=$(echo $chvc | cut -d ' ' -f 3- | cut -d '.' -f 1-3)
 
-pip3 install selenium
 
 
 driver_file_url="https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$chrome_version"
@@ -34,7 +33,9 @@ pushd tmp-build
     sudo chmod +x ../
 popd
 
-rm -rf tmp-build
+sudo rm -rf tmp-build
+
+pip3 install selenium
 
 export PATH=$PATH:/usr/local/bin/chromedriver
 
