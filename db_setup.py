@@ -40,19 +40,10 @@ def db_main():
     email_pass TEXT);
     """
 
-    b_table = """CREATE TABLE IF NOT EXISTS content (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    platform TEXT,
-    heading TEXT,
-    paragraph TEXT,
-    image TEXT);
-    """
-
     conn = create_connection(file_path)
 
     if conn is not None:
         create_table(conn, a_table)
-        create_table(conn, b_table)
         conn.commit()
         print(colors.BGREEN + "[~] Database successfully created!" + colors.END)
         conn.close()

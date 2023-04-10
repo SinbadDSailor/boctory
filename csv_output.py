@@ -32,6 +32,7 @@ def output_csv(): # Export to CSV function---------->
 
     conn = create_connection(file_path)
 
+
     print_out_comm = """SELECT * FROM bots;"""
 
     if conn is not None:
@@ -42,5 +43,7 @@ def output_csv(): # Export to CSV function---------->
     else:
         logger.error("Error while trying to output to CSV")
                   # Export to CSV function---------/>
+
+
 
 output_csv()

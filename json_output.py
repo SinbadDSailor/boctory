@@ -3,6 +3,7 @@ import os
 import pandas as pd
 import sqlite3
 from sqlite3 import Error
+from colors import colors
 
 #Logging setup ------------------>
 filenm = "storage/log.log"
@@ -31,7 +32,7 @@ def output_json(): # Export to JSON function---------->
     print_out_comm = """SELECT * FROM bots;"""
 
     conn = create_connection(file_path)
-    cursor = conn.execute(print_out_comm)
+    #cursor = conn.execute(print_out_comm)
 
     if conn is not None:
         json_obj = pd.read_sql_query(print_out_comm, conn)
@@ -42,4 +43,6 @@ def output_json(): # Export to JSON function---------->
         logger.error("Error while trying to output JSON")
         # Export to JSON function---------/>
 
+
 output_json()
+

@@ -20,7 +20,7 @@ mainfunc () {
         read -r -p "Enter your option: " main_option
 
         case $main_option in
-            1) echo "Reserved";;
+            1) attack_options;;
             2) python3 test.py | tee test.txt;;
             3) db_man;;
             4) adv_options;;
@@ -49,7 +49,7 @@ banner_print () {
 main_menu () {
     echo ""
     echo -e "$blue      MAIN MENU $tail"
-    echo "[1] Reserved"
+    echo "[1] Attacks"
     echo "[2] Python test run"
     echo "[3] Database Management"
     echo "[4] Advanced Options"
@@ -98,6 +98,16 @@ output_options_menu () {
     echo "[2] Output to CSV"
     echo "[3] Output to JSON"
     echo "[4] Back"
+    echo "======================="
+
+}
+
+attack_options_menu () {
+
+    echo ""
+    echo -e "${tblue}Main-Menu/Attacks $tail"
+    echo "[1] Comment on posts"
+    echo "[2] Back"
     echo "======================="
 
 }
@@ -179,5 +189,50 @@ adv_options () {
     done
 
 }
+
+attack_options () {
+
+    while :
+    do
+        attack_options_menu
+        read -r -p "Enter your option: " attack_opt_option
+
+        case $attack_opt_option in
+            1) python3 comment_attack.py;;
+            2) break;;
+            *) echo -e "${red}Invalid input! $tail"
+            
+        esac
+
+    done
+
+}
+
+
+Help () {
+
+    echo "BOCTORY HELP PAGE"
+    echo ""
+    echo "**IMPORTANT**"
+    echo "On first program execution, database setup is needed. Database setup option is"
+    echo "located under > Main-Menu/Database-Management sub-menu with option [1]"
+    echo ""
+    echo "Syntax: ./main.sh [options]"
+    echo ""
+    echo "Print out help page:  -h"
+    echo ""
+}
+
+
+while getopts ":h" option; do
+   case $option in
+      h) # display Help
+         Help
+         exit;;
+     \?) # incorrect option
+         echo "Error: Invalid option"
+         exit;;
+   esac
+done
 
 mainfunc
