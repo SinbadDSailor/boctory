@@ -35,4 +35,5 @@ def bulk_csv_import():
     except Error as e:
         logger.error(e)
 
+
 bulk_csv_import()
